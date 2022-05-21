@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo
+    volumes:
+      - app-database-data:/opt/data/
+    ports:
+      - 27017:27017
+    container_name: leads-mongo
+volumes:
+  app-database-data:
