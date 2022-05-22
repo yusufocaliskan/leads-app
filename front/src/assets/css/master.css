@@ -1,4 +1,35 @@
 :root{
-    --green: #02cfc0
+    --green: #02cfc0;
+    --yellow: #ffd24d;
+    --purple: #ac7dfd;
+    --black: #333;
 }
 
+.green-color{
+    color : var(--green) !important;
+}
+.yellow-color{
+    color: var(--yellow) !important
+}
+.purple-color{
+    color: var(--purple) !important
+}
+
+.green-bg{
+    background: var(--green) !important;
+    
+}
+.yellow-bg{
+    background: var(--yellow) !important;
+    color: var(--black) !important
+}
+.purple-bg{
+    background: var(--purple) !important;
+    color: #fff !important
+}
+.purple-bg:hover{
+    opacity: 0.9
+}
+.yellow-bg:hover{
+    opacity: 0.9
+}
