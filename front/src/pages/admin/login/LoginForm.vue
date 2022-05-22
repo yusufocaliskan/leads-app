@@ -1,6 +1,9 @@
 
 <script setup>
   import Forms from '../../../components/login/forms.vue'
+  import {useStore} from 'vuex'
+  const store = useStore()
+  console.log(store)
 </script>
 
 <template>

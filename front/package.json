@@ -11,7 +11,8 @@
     "@headlessui/vue": "^1.6.2",
     "@heroicons/vue": "^1.0.6",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
