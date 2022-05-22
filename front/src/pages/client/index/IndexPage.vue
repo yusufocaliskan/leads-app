@@ -13,7 +13,7 @@
                 <div class="flex items-center justify-center w-full md:w-auto">
                   <a href="#">
                     <span class="sr-only">learnwolds</span>
-                    <img alt="Workflow" class="h-8 w-auto sm:h-10" src="../assets/images/logo.png" />
+                    <img alt="Workflow" class="h-8 w-auto sm:h-10" src="../../../assets/images/logo.png" />
                   </a>
                  
                 </div>
@@ -37,7 +37,9 @@
                 <a href="#" class="yellow-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"> Get started </a>
               </div>
               <div class="mt-3 sm:mt-0 sm:ml-3">
-                <a href="#" class="purple-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">  Login </a>
+              <router-link to="/login" class="purple-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                Login
+                </router-link>
               </div>
             </div>
           </div>
@@ -45,7 +47,7 @@
       </div>
     </div>
     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="../../public/front-image.avif" alt="" />
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="../../../../public/front-image.avif" alt="" />
     </div>
   </div>
 </template>
@@ -53,3 +55,4 @@
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 </script>
+

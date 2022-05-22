@@ -8,6 +8,10 @@
 .green-color{
     color : var(--green) !important;
 }
+
+.black-color{
+    color : var(--black) !important;
+}
 .yellow-color{
     color: var(--yellow) !important
 }
