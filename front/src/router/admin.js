@@ -1,6 +1,6 @@
 //Imports all pages components
 import DashboardIndex from '../pages/admin/dashboard/DashboardIndex.vue'
-
+import ListLeads from '../pages/admin/leads/ListLeads.vue'
 //Login Page
 import LoginForm from '../pages/admin/login/LoginForm.vue'
 
@@ -14,6 +14,16 @@ const admin_routes = [
             layout: "AdminLayout",
             auth: true,
         }
+    },
+    {
+        path: '/leads',
+        component:ListLeads,
+        name: 'list-leads',
+        meta: {
+            layout:'AdminLayout',
+            auth:true
+        }
+        
     },
 
     {
