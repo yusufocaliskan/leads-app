@@ -1,6 +1,6 @@
 <script setup>
 
-import {computed} from 'vue';
+import {computed, inject} from 'vue';
 import { useRoute } from 'vue-router';
 
 //Import the layouts
@@ -15,6 +15,7 @@ const route = useRoute()
 
 //Define the layout container
 const default_layout = ClientLayout;
+
 const layout_container = {
   'LoginLayout' : LoginLayout,
   'AdminLayout' : AdminLayout,

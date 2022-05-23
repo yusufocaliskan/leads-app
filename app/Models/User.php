@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Jenssegers\Mongodb\Eloquent\Model;
+use Laravel\Sanctum\Contracts\HasAbilities;
+
+
+class User extends Authenticatable implements HasAbilities
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+
+    protected $collection = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +23,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
@@ -41,4 +45,35 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the tokenable model that the access token belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function tokenable()
+    {
+        return $this->morphTo('tokenable');
+    }
+
+    /**
+     * Find the token instance matching the given token.
+     *
+     * @param  string  $token
+     * @return static|null
+     */
+    public static function findToken($token)
+    {
+        if (strpos($token, '|') === false) {
+            return static::where('token', hash('sha256', $token))->first();
+        }
+
+        [$id, $token] = explode('|', $token, 2);
+
+        if ($instance = static::find($id)) {
+            return hash_equals($instance->token, hash('sha256', $token)) ? $instance : null;
+        }
+    }
+
+    
 }

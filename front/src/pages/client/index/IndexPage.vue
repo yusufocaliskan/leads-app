@@ -1,3 +1,7 @@
+<script setup>
+import { Popover } from '@headlessui/vue'
+</script>
+
 <template>
   <div class="relative bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto">
@@ -52,7 +56,5 @@
   </div>
 </template>
 
-<script setup>
-import { Popover } from '@headlessui/vue'
-</script>
+
 

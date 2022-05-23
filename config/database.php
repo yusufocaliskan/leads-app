@@ -97,15 +97,19 @@ return [
         //Beacause we are going to use MongoDb
         
         'mongodb' => [
-            'driver' => 'mongodb',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
+            'driver'   => 'mongodb',
+            'host'     => env('MONGO_HOST', 'localhost'),
+            'port'     => env('MONGO_PORT', 27017),
+            'database' => env('MONGO_DATABASE', 'leads_app'),
+            'username' => env('MONGO_USERNAME', ''),
+            'password' => env('MONGO_PASSWORD', ''),
             'options' => [
-                'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo 3+
+                env('MONGO_OPTION_NAME', 'db') => env('MONGO_DB_AUTH', 'admin'), // sets the authentication database required by mongo 3
+                'retryWrites' => false
             ],
+            'dump' => [
+                'mongodb_user_auth' => env('MONGO_DB_AUTH', 'admin') //Auth for laravel backup plugin
+            ]
         ],
     ],
 
