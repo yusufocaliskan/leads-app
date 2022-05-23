@@ -8,17 +8,24 @@ use App\Models\Leads as LeadsModel;
 class Leads extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Lists all the leads in the database
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        //Get all the data 
+        $leads = LeadsModel::get();
+        
+
+        //An response it.
+        return response([
+            'leads'=>$leads
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Creates new leads
      *
      * @return \Illuminate\Http\Response
      */
@@ -108,8 +115,26 @@ class Leads extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($leadId)
     {
-        //
+        $delete = LeadsModel::destroy($leadId);
+        
+        if($delete)
+        {
+            return response([
+                'error'=>[
+                    'type'=>'success',
+                    'message'=>'The record deleted.'
+                ]
+            ],200);
+        }
+
+        return response([
+            'error'=>[
+                'type'=>'danger',
+                'message'=>'An unexpected error thrown.'
+            ]
+        ],422);
+
     }
 }

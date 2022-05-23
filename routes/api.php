@@ -40,7 +40,7 @@ Route::prefix('/lead')->group(function(){
     Route::put('/update/{id}',[Leads::class,'update']);
 
     //Destroys given id
-    Route::delete('/destroy/{id}',[Leads::class,'destroy']);
+    Route::post('/delete/{id}',[Leads::class,'destroy']);
 
 });
 

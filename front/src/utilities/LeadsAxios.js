@@ -11,7 +11,8 @@ const LeadsAxios = axios.create({
 });
 
 
-//pass' the user token to the each request
+//include the user token to the each request
+//it is a necessity of Laravel 
 LeadsAxios.interceptors.request.use(config =>{
 
     config.headers.Authorization = `Bearer ${store.state.UserModule.admin_data.token}`
