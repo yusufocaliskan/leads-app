@@ -2,41 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class Users extends Controller
 {
     public function login(Request $request)
     {   
         //Get the user infos..
-        $credentials = $request->only('email', 'password');
-        
-        if ($token = $this->guard()->attempt($credentials)) {
-            $resp = response()->json([
-                'status' =>  'success',
-                'token'=>$token
+        $data = $request->validate(
+            [
+                'email'=>'required|string',
+                'password'=>'required|string'
+            ]
+        );
 
-            ], 200)->header('Authorization', $token);
-
-            $user = $this->guard()->user();
-            $token = $user->createToken('main')->plainTextToken;
-            echo '<pre>';
-            print_r($token);
-            echo '</pre>';
-
-            return $resp;
+            
+        //Check the information
+        if(!Auth::attempt($data))
+        {
+            return response([
+                'error'=>[
+                    'type'=>'danger',
+                    'message'=>'Something went wrong, check your informations.'
+                ]
+            ],422);
         }
-        return response()->json([
-            'error' => 'login_error'
-        ], 401);
+        
+        if(empty($request->email) || empty($request->password))
+        {
+            return response([
+                'error'=>[
+                    'type'=>'warning',
+                    'message'=>'Please fill the form correctly'
+                ]
+            ],422);
+        }
+        
+        $user = Auth::user();
+        
+        //If everything is okay.
+        //Create a new token
+        $token = $user->createToken('main')->plainTextToken;
+
+        //And send it back to user
+        return response([
+            'token'=>$token,
+            'user'=>$user
+        ]);
+        
+        
     }
 
     public function logout()
     {
-        $this->guard()->logout();
+        $user = Auth::user();
+       
+        $user->currentAccessToken()->delete();
 
         return response()->json([
             'status' => 'success',
@@ -44,16 +69,7 @@ class Users extends Controller
         ], 200);
     }
 
-    public function admin(Request $request)
-    {
-        $admin = Admin::find(Auth::admin()->id);
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $admin
-        ]);
-    }
-
+  
     public function refresh()
     {
         if ($token = $this->guard()->refresh()) {

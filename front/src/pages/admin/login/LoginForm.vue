@@ -1,15 +1,14 @@
 
 <script setup>
   import { LockClosedIcon, UserAddIcon } from '@heroicons/vue/solid'
+  import axios from 'axios';
   import {ref, inject} from 'vue'
-  import { useToast } from "vue-toastification";
+ 
   
  
  //Get the providers
   const Axios = inject('Axios')
   const Store = inject('Store');
-
-  const toast = useToast()
 
   //define the varialbes.
   const data = ref({
@@ -17,21 +16,24 @@
     password: ''
   })
 
-  const errors = ref('')
+  let errors = ref('')
 
   function Login(){
 
-    Axios.post('http://localhost:8000/login',{
+    axios.post('http://localhost:8000/api/users/login',{
       email: data.value.email,
       password: data.value.password
     })
     .then((response) => {
-      console.log(response)
-      if(response.status == 200)
-      {
-        toast.create()
-      }
-    })  
+
+        //Save the user token
+        //We will then use to auth the user
+        Store.commit('set_user_token',response.data)
+
+    })
+    .catch(err => {
+      errors.value = err.response.data.error
+    })
   }
 
 </script>
@@ -49,10 +51,11 @@
       <form class="mt-8 space-y-6" @submit.prevent="Login" >
         <input type="hidden" name="remember" value="true" />
 
-        <div v-if="errors">
-          {{errors}}
+         <div role="alert" v-if="errors">
+          <div class="bg-red-500 rounded text-white font-bold px-4 py-2">
+            {{errors.message}}
+          </div>
         </div>
-
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label for="email-address" class="sr-only">Email address</label>

@@ -3,7 +3,7 @@ import store from '../store/'
 
 //Create a custom axios
 const LeadsAxios = axios.create({
-    baseURL: 'http://localhost:8000/',
+    baseURL: 'http://localhost:8000/api/',
     headers:{
         "Content-Type":'applications/json',
         accept:'applications/json'

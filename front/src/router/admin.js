@@ -9,9 +9,10 @@ const admin_routes = [
     {
         path:'/dashboard/',
         component:DashboardIndex,
-        name: 'dashboard-index',
+        name: 'dashboard',
         meta: {
-            layout: "AdminLayout"
+            layout: "AdminLayout",
+            auth: true,
         }
     },
 
