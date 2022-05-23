@@ -20,7 +20,7 @@ class Users extends Controller
             ]
         );
 
-            
+   
         //Check the information
         if(!Auth::attempt($data))
         {
@@ -31,19 +31,10 @@ class Users extends Controller
                 ]
             ],422);
         }
-        
-        if(empty($request->email) || empty($request->password))
-        {
-            return response([
-                'error'=>[
-                    'type'=>'warning',
-                    'message'=>'Please fill the form correctly'
-                ]
-            ],422);
-        }
-        
+      
         $user = Auth::user();
         
+       
         //If everything is okay.
         //Create a new token
         $token = $user->createToken('main')->plainTextToken;
@@ -59,14 +50,21 @@ class Users extends Controller
 
     public function logout()
     {
-        $user = Auth::user();
-       
-        $user->currentAccessToken()->delete();
+        if(Auth::logout())
+        {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Logget out'
+            ], 200);
+        }
 
         return response()->json([
-            'status' => 'success',
-            'msg' => 'Logget out'
+            'status' => 'danger',
+            'message' => 'Something went wrong'
         ], 200);
+       
+
+        
     }
 
   

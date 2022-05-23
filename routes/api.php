@@ -18,21 +18,9 @@ use App\Http\Controllers\Leads;
 |
 */
 
-Route::middleware('auth:sanctum')->group( function () {
-    Route::get('/users', function(Request $request){
-        return $request->user();    
-    });
-
-    //Logout
-    Route::post('/logout',[Users ::class,'logout']);    
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
-
-//Login.
-Route::post('/users/login',[Users::class,'login']);
-
-
-
-
 
 /*********************************** | Leads App Router | *****************************************/
 
@@ -54,3 +42,10 @@ Route::prefix('/lead')->group(function(){
 });
 
 /*********************************** | User | *****************************************/
+
+//Login.
+Route::post('/users/login',[Users::class,'login']);
+
+//Logout
+Route::post('/users/logout',[Users::class,'logout']);
+
