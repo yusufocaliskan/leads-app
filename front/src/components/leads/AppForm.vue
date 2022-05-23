@@ -34,9 +34,13 @@
         {
           //errors.value = resp.data.error.message
           toast.success(resp.data.error.message)
+
+          //Clear variables.
           lead_data.value.email = null
           lead_data.value.name = null
           lead_data.value.terms = null
+          errors.value = null
+
         }
         
       })

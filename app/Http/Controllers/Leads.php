@@ -31,11 +31,10 @@ class Leads extends Controller
      */
     public function create(Request $request)
     {
-        
         //-------------- [ Make some validation ] ---------------
         $data = $request->validate([
-            'name'=>'required',
-            'email'=>'required',
+            'name'=>'required|string',
+            'email'=>'required|email',
             'terms'=>'required'
         ]);
 
@@ -64,16 +63,7 @@ class Leads extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Display the specified resource.
@@ -82,8 +72,27 @@ class Leads extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        if(empty($id))
+        {
+            return response([
+                'error'=>'Select a lead'
+            ],422);    
+        }
+
+        $lead = LeadsModel::find($id);
+       
+        if($lead)
+        {
+            return response([
+                'lead'=>$lead
+            ],200);
+        }
+
+        return response([
+            'error'=>'An error occurred'
+        ],422);
+
     }
 
     /**
@@ -106,7 +115,32 @@ class Leads extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'email'=>'required|email|string',
+            'name'=>'required|string',
+            'terms'=>'required'
+        ]);
+        
+        $update = LeadsModel::where('_id', $id)
+          ->update($data);
+        if($update)
+        {
+            return response([
+                'error'=>[
+                    'type'=>'success',
+                    'message'=>'The record has updated.'
+                ]
+            ],200);
+    
+        }
+
+        return response([
+            'error'=>[
+                'type'=>'danger',
+                'message'=>'Opps! There are some unexpected errors. Try aganin late.'
+            ]
+        ],422);
+
     }
 
     /**

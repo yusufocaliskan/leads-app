@@ -1,18 +1,25 @@
 <script setup>
     import {ref, inject, onMounted} from 'vue'
     import { useToast,POSITION } from 'vue-toastification';
-    import { $vfm, VueFinalModal, ModalsContainer } from 'vue-final-modal'
+    import EditForm from "../../../components/leads/EditForm.vue";
+
 
     //Define the provides.
     const Store = inject('Store')
     const Router = inject('Router')
     const Axios = inject('Axios')
-    const Toast = useToast()
-
-    //Leads...
-    const all_leads = ref([]);
-
     
+
+    //Toast Message
+    const Toast = useToast()
+    
+    //Leads...
+    const all_leads = ref([])
+
+    const current_lead = ref([])
+    
+    let show_form = false
+
     /**
      * Get all the leads..
      */
@@ -50,19 +57,34 @@
         })
     }
 
-    function edit_lead(){
-      
+    function edit_lead(leadId){
+
+        show_form = true
+        //Get the leads data via id
+        Axios.post('/lead/show/'+leadId)
+        .then(resp => {
+            current_lead.value = resp.data.lead;
+           
+        })
+
+    }
+
+    function save_lead()
+    {
+        
+       Axios.put('/lead/update/'+current_lead.value._id,current_lead.value)
+       .then(resp => {
+           Toast.success(resp.data.error.message)
+       })
     }
 
 </script>
 
 <template>
 
-<VueFinalModal drag-selector=".modal-drag">
-  <div class="modal-title modal-drag"> </div>
-  <div class="modal-content"> </div>
-  <div class="modal-action"> </div>
-</VueFinalModal>
+<EditForm :show="show_form" :lead_data="current_lead" @save-lead="save_lead" />
+
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -94,7 +116,10 @@
                     {{lead.email}}
                 </td>
                 <td class="px-6 py-4">
-                    {{lead.terms}}
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">
+                        {{lead.terms ? 'approves' : lead.terms}}
+                    </span>
+                    
                 </td>
                 
                 <td class="px-6 py-4 text-right">
@@ -103,7 +128,7 @@
                             <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <a @click="edit_lead" href="#" class="inline-block  ml-4 text-blue-600 dark:text-blue-500  dark:text-blue-500 hover:text-black hover:bg-amber-300 rounded p-1 ">
+                    <a @click.prevent="edit_lead(lead._id,$event)" href="#" class="inline-block  ml-4 text-blue-600 dark:text-blue-500  dark:text-blue-500 hover:text-black hover:bg-amber-300 rounded p-1 ">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5  " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>

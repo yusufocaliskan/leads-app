@@ -21,6 +21,9 @@
     color: var(--purple) !important
 }
 
+.border-yellow{
+    border-color: var(--yellow) !important
+}
 .green-bg{
     background: var(--green) !important;
     

@@ -7,10 +7,14 @@ import LeadsAxios from './utilities/LeadsAxios'
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
+//Modal
+import VueFinalModal from 'vue-final-modal'
+import { $vfm } from 'vue-final-modal'
+
+
 //import the store and router 
 import store from './store'
 import router from './router'
-import { useRoute } from 'vue-router'
 
 //Create app
 const app = createApp(App);
@@ -19,7 +23,10 @@ const app = createApp(App);
 app.provide('Axios', LeadsAxios)
 app.provide('Store', store)
 app.provide('Router', router)
+app.provide('vModal',$vfm)
 
+//set modal
+app.use(VueFinalModal())
 
 //set the store and the router
 //Mids

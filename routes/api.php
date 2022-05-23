@@ -30,10 +30,10 @@ Route::post('/leads',[Leads::class, 'index']);
 Route::prefix('/lead')->group(function(){
 
     //selects by id.  /leads/1
-    Route::get('/{id}',[Leads::class,'show']);
+    Route::post('/show/{id}',[Leads::class,'show']);
 
     //Create new on
-    Route::post('/create/',[Leads::class,'create']);
+    Route::post("/create",[Leads::class,'create']);
 
     //updates by id.
     //The sent data will be saved by using id
