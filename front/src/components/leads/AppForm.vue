@@ -75,7 +75,7 @@
 
 </template>
 
-<style>
+<style scoped>
     body{
         background:#E3EEFF 
     }

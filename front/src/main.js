@@ -18,6 +18,7 @@ const app = createApp(App);
 //Set the provides
 app.provide('Axios', LeadsAxios)
 app.provide('Store', store)
+app.provide('Router', router)
 
 
 //set the store and the router
