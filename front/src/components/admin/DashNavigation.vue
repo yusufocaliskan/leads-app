@@ -7,8 +7,8 @@
 
     const navigation = [
     { name: 'Dashboard', href: '#', current: true },
-    { name: 'Home', href: '/', current: false },
     { name: 'Leads', href: '/leads', current: false },
+    { name: 'Home', href: '/', current: false },
     { name: 'MailChmi', href: '/leads', current: false }
 
     ]

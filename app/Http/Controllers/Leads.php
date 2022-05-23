@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Leads as LeadsModel;
 
 class Leads extends Controller
 {
@@ -23,7 +24,35 @@ class Leads extends Controller
      */
     public function create(Request $request)
     {
+        
         //-------------- [ Make some validation ] ---------------
+        $data = $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'terms'=>'required'
+        ]);
+
+
+        //Clear it
+        //$data['terms'] = $data['terms'] ? 'yes' : 'no';
+        $create = LeadsModel::create($data);
+         if($create)
+         {
+            return response([
+                'error'=>[
+                    'type'=>'success',
+                    'message'=>'Your application has been successfully received. We will contact with you via the mail you submitted.'
+                ]
+            ],200);
+        }
+        
+        return response([
+            'error'=>[
+                'type'=>'danger',
+                'message'=>'Opps! There are some unexpected errors. Try aganin late.'
+            ]
+        ],422);
+
         
 
     }

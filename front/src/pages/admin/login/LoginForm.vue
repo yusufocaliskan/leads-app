@@ -20,6 +20,7 @@
 
   function Login(){
 
+    //Request to the server
     axios.post('http://localhost:8000/api/users/login',{
       email: data.value.email,
       password: data.value.password

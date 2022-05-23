@@ -16,6 +16,10 @@ class Leads extends Model
     //Define the collection
     protected $collection = 'leads';
 
-    //override the database
+    protected $fillable = [
+        'email',
+        'name',
+        'terms',
+    ];
 
 }

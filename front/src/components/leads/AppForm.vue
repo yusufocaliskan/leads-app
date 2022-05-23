@@ -1,5 +1,52 @@
 <script setup>
-   import { LockClosedIcon } from '@heroicons/vue/solid'
+
+  import { ref, inject } from 'vue'
+  import Notice from '../../components/admin/Notice.vue'
+  import { useToast } from 'vue-toastification';
+  
+  const Store = inject('Store')
+  const Router = inject('Router')
+  const Axios = inject('Axios')
+
+  //catch the errros
+  let errors = ref('')
+  let toast = useToast()
+
+  //Gett the data
+  const lead_data = ref({
+    'name': null,
+    'email': null,
+    'terms':null
+  })
+  
+
+  function save_lead()
+  {
+      Axios.post('/lead/create/',{
+        'name':lead_data.value.name,
+        'email':lead_data.value.email,
+        'terms':lead_data.value.terms
+      })
+      .then(resp => {
+        
+        //If its created
+        if(resp.data.error.type=='success')
+        {
+          //errors.value = resp.data.error.message
+          toast.success(resp.data.error.message)
+          lead_data.value.email = null
+          lead_data.value.name = null
+          lead_data.value.terms = null
+        }
+        
+      })
+
+      //Show them thee errors.
+      .catch(err => {
+          errors.value = err.response.data.errors
+      })
+  }
+   
 </script>
 
 <template>
@@ -7,41 +54,41 @@
     <div class=" ">
       
       <div class="mt-5 md:mt-0">
-        <form action="#" method="POST">
+        <form @submit.prevent="save_lead">
           <div class="shadow overflow-hidden sm:rounded-md">
              
-            <div class="px-4 py-5 bg-white sm:p-6">
+            <div class="px-4 py-5 bg-white sm:p-6 mt-4">
                 <h1 class="font-medium text-2xl green-color">Application form</h1>
-                 <p class="mt-2 text-md mb-10 text-gray-500">
-                
+                 <p class="mt-2 text-md mb-5 text-gray-500">
+                   
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed ullam eveniet commodi amet hic nulla est eum debitis porro nisi? Ducimus, debitis quasi voluptas velit?
                 </p>
-              <div class="grid grid-cols-6 gap-6">
-                <div class="col-span-6 sm:col-span-3">
-                  <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                  <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
+                
+                <Notice :errors="errors" v-if="errors"/>
+              <div class="grid grid-cols-1">
+
+               <div class="col-span-1 sm:col-span-4">
+                  <label for="name" class="block mb-2 mt-4 text-sm font-medium text-gray-700">Your Full name</label>
+                  <input v-model="lead_data.name" type="text" placeholder="Type your full name" name="name" id="name" autocomplete="name" class="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
-                  <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                  <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
+                <div class="col-span-1 sm:col-span-4">
+                  <label for="email" class="block text-sm mb-2 mt-4  font-medium text-gray-700">Email address</label>
+                  <input v-model="lead_data.email" placeholder="Your e-mail address" type="text" name="email" id="email" autocomplete="email" class="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
                 </div>
 
-                <div class="col-span-6 sm:col-span-4">
-                  <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                  <input type="text" name="email-address" id="email-address" autocomplete="email" class="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
-                </div>
-
-                <div class="col-span-6">
+                <div class="col-span-6 mt-7">
                     <fieldset>
-                    <div class="mt-4 space-y-4">
+                    <div class="mb-14 space-y-4">
                   <div class="flex items-start">
                     <div class="flex items-center h-5">
-                      <input id="comments" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                      <input v-model="lead_data.terms" value="yes" id="terms" name="terms" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
                     </div>
                     <div class="ml-3 text-sm">
-                      <label for="comments" class="font-medium text-gray-700"> 
-                      <p class="text-gray-500 font-normal">Get notified when someones posts a comment on a posting.</p>
+                      <label for="terms" class="font-medium text-gray-700"> 
+                      <p class="text-gray-500 font-normal">
+                        By clicking Apply, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.
+                      </p>
                       </label>
                     </div>
                   </div>

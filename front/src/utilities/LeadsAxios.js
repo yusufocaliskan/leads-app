@@ -14,7 +14,7 @@ const LeadsAxios = axios.create({
 //pass' the user token to the each request
 LeadsAxios.interceptors.request.use(config =>{
 
-    config.headers.Authorization = `Bearer ${store.state.UserModule.data.token}`
+    config.headers.Authorization = `Bearer ${store.state.UserModule.admin_data.token}`
     return config;
 })
 
