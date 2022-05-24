@@ -10,7 +10,8 @@ const client_layout = [
         component: IndexPage,
         name: "index",
         meta: {
-            layout: "ClientLayout"
+            layout: "ClientLayout",
+            title: 'Welcome | Leads Application'
         }
     },
 
@@ -19,7 +20,8 @@ const client_layout = [
         component: LeadAppForm,
         name: 'app-form',
         meta:{
-            layout: 'ClientLayout'
+            layout: 'ClientLayout',
+            title: 'Lead\'s Application Form | Leads Application'
         }
 
     }

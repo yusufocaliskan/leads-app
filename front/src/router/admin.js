@@ -13,6 +13,8 @@ const admin_routes = [
         meta: {
             layout: "AdminLayout",
             auth: true,
+            title: 'Dashboard | Leads Application',
+            dashboard_title: 'Dashboard'
         }
     },
     {
@@ -21,7 +23,9 @@ const admin_routes = [
         name: 'list-leads',
         meta: {
             layout:'AdminLayout',
-            auth:true
+            auth:true,
+            title: 'Leads | Leads Application',
+            dashboard_title: 'Leads',
         }
         
     },
@@ -31,7 +35,8 @@ const admin_routes = [
         component:LoginForm,
         name: 'login-form',
         meta: {
-            layout:'LoginLayout'
+            layout:'LoginLayout',
+            title: 'Login | Leads Application'
         }
         
     }

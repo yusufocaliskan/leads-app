@@ -22,6 +22,10 @@ const router = createRouter({
 router.beforeEach((to, form, next) => {
 
     //--------------- [ Step#1 ] ---------------
+    //First lets change the title :)
+    document.title = to.meta.title
+
+    //--------------- [ Step#2 ] ---------------
     //Is it logged in?
     //and the page is required auth?
     if(to.meta.auth == true && !store.state.UserModule.admin_data.token)
@@ -30,7 +34,7 @@ router.beforeEach((to, form, next) => {
         next({name:'index'})
     }
 
-    //--------------- [ Step#2 ] ---------------
+    //--------------- [ Step#3 ] ---------------
     //It is Logged in and wants to try attempt to Login page?
     //Don't let them to go to login page again
     //It could coused to the errors
@@ -41,7 +45,7 @@ router.beforeEach((to, form, next) => {
     }
 
 
-    //--------------- [ Step#3 ] --------------- 
+    //--------------- [ Step#4 ] --------------- 
     //It is logged in, go to wherever you want
     else{
         next()

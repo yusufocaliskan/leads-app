@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps, ref, toRef, watch } from "vue";
+    import { defineProps} from "vue";
     import Notice from '../../components/admin/Notice.vue'
     
     const props = defineProps({
@@ -13,7 +13,7 @@
 
 <template>
   
-  <div v-if="show == true " class="mt-10 mb-10  sm:mt-0 bg-gray-50">
+  <div v-if="show == true " class="mt-10 sm:mt-0 bg-gray-50">
       <div class="relative">
             <div @click="show = false" class="absolute right-5 top-5  bg-slate-100 hover:bg-slate-500 hover:bg-red-300 hover:text-rose-600	 rounded-full border-solid hover:border-rose-200 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

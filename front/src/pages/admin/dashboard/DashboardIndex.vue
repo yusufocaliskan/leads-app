@@ -1,11 +1,11 @@
 
 <script setup> 
     
-    import Alert from '../../../components/admin/alert.vue'
-
 </script>
 <template>
-    <h1>Dashboard</h1>
-    <Alert></Alert>
+    <div class="p-10">
+        <h1 class="h1">Hi!</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta autem voluptatem itaque. Repellat maiores ut delectus, eum deserunt sequi tenetur, quos hic rem est debitis dolor autem, odit molestias nam.</p>
+    </div>
 </template>
 
