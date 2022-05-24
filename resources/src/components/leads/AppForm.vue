@@ -1,56 +1,11 @@
 <script setup>
-
-  import { ref, inject } from 'vue'
   import Notice from '../../components/admin/Notice.vue'
-  import { useToast } from 'vue-toastification';
-  
-  const Store = inject('Store')
-  const Router = inject('Router')
-  const Axios = inject('Axios')
+  import { defineProps } from 'vue';
 
-  //catch the errros
-  let errors = ref('')
-  let toast = useToast()
-
-  //Gett the data
-  const lead_data = ref({
-    'name': null,
-    'email': null,
-    'terms':null
+  const props = defineProps({
+      errors: Object,
+      lead_data: Object
   })
-  
-
-  function save_lead()
-  {
-      Axios.post('/lead/create/',{
-        'name':lead_data.value.name,
-        'email':lead_data.value.email,
-        'terms':lead_data.value.terms
-      })
-      .then(resp => {
-        
-        //If its created
-        if(resp.data.error.type=='success')
-        {
-          //errors.value = resp.data.error.message
-          toast.success(resp.data.error.message)
-
-          //Clear variables.
-          lead_data.value.email = null
-          lead_data.value.name = null
-          lead_data.value.terms = null
-          errors.value = null
-
-        }
-        
-      })
-
-      //Show them thee errors.
-      .catch(err => {
-          errors.value = err.response.data.errors
-      })
-  }
-   
 </script>
 
 <template>
@@ -58,7 +13,7 @@
     <div class=" ">
       
       <div class="mt-5 md:mt-0">
-        <form @submit.prevent="save_lead">
+        <form @submit.prevent="$emit('save_lead')">
           <div class="shadow overflow-hidden sm:rounded-md">
              
             <div class="px-4 py-5 bg-white sm:p-6 mt-4">
