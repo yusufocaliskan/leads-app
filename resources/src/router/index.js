@@ -1,13 +1,24 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import store from '../store';
+import PageNotFound from '../components/PageNotFound.vue'
 
 //Import the custom routes
 import admin_routes from './admin';
-import client_layout from './client';
-
+import client_route from './client';
+const default_routes =[
+    { 
+        path: '/:pathMatch(.*)*', 
+        component:PageNotFound,
+        name: 'not-found',
+        meta: {
+            layout:'LoginLayout',
+            title: 'Not Found | Leads Application'
+        }
+    },
+]
 
 //Gether all the routes
-const routes = [...client_layout, ...admin_routes];
+const routes = [...client_route, ...admin_routes, ...default_routes];
 
 //Create the router
 const router = createRouter({
