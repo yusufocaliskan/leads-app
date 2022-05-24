@@ -9,9 +9,19 @@ import UserModule from './modules/UserModule'
  * Crate the store
  */
 const store = createStore({
-    state:{},
-    actions:{},
-    mutations:{},
+    state:{
+        is_Loading: null
+    },
+    actions:{
+        setLoading({commit}, val){
+            commit('setLoading', val)
+        }
+    },
+    mutations:{
+        setLoading(state, val){
+            state.is_Loading = val
+        }
+    },
     getters:{},
     modules:{
         LeadsModule:LeadsModule,

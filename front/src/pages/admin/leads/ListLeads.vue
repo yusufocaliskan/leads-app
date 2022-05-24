@@ -1,14 +1,13 @@
 <script setup>
-    import {ref, inject, onMounted} from 'vue'
+    import {ref, inject, onMounted, computed} from 'vue'
     import { useToast,POSITION } from 'vue-toastification';
     import EditForm from "../../../components/leads/EditForm.vue";
+    import Loading from "../../../components/admin/Loading.vue"
 
 
     //Define the provides.
-    const Store = inject('Store')
-    const Router = inject('Router')
     const Axios = inject('Axios')
-    
+    const Store = inject('Store')
 
     //Toast Message
     const Toast = useToast()
@@ -20,7 +19,8 @@
     //errors
     const errors = ref([])
 
-    
+    //To show the loading bar. 
+    const is_Loading = computed(()=> Store.state.is_Loading )
 
     /**
      * Get all the leads..
@@ -30,12 +30,15 @@
     })
     function get_all_leads(){
 
+        Store.dispatch('setLoading',true)
+
         //Get all the leads
         Axios.post('/leads')
         .then(resp => {
 
             //set them
             all_leads.value = resp.data.leads
+            Store.dispatch('setLoading',false)
         })
     }
 
@@ -95,7 +98,7 @@
        Axios.put('/lead/update/'+current_lead.value._id,current_lead.value)
        .then(resp => {
            Toast.success(resp.data.error.message)
-           
+
           //Clear variables.
           lead_data.value.email = null
           lead_data.value.name = null
@@ -112,10 +115,13 @@
 
 <template>
 
-<EditForm :errors="errors" :lead_data="current_lead" @save-lead="save_lead" />
+    <EditForm :errors="errors" :lead_data="current_lead" @save-lead="save_lead" />
 
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="loading" v-if="is_Loading">
+    <div class="loader"></div>
+    <p>Loading...</p>
+</div>
+<div v-else class="relative overflow-x-auto shadow-md sm:rounded-lg">
     
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
