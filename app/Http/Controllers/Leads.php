@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Leads as LeadsModel;
+use App\Libs\MailChimp;
+use Newsletter;
 
 class Leads extends Controller
-{
+{   
+
     /**
      * Lists all the leads in the database
      *
@@ -44,12 +47,18 @@ class Leads extends Controller
         $create = LeadsModel::create($data);
          if($create)
          {
-            return response([
+           $resp = response([
                 'error'=>[
                     'type'=>'success',
                     'message'=>'Your application has been successfully received. We will contact with you via the mail you submitted.'
                 ]
             ],200);
+
+            //Add it to MailChimp List
+            $name = explode(' ', $data['name']);
+            Newsletter::subscribe($data['email'], ['FNAME'=>$name[0], 'LNAME'=>$name[0]]);
+        
+           return $resp;
         }
         
         return response([
@@ -114,7 +123,8 @@ class Leads extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        //Validata
         $data = $request->validate([
             'email'=>'required|email|string',
             'name'=>'required|string',
@@ -125,12 +135,30 @@ class Leads extends Controller
           ->update($data);
         if($update)
         {
-            return response([
+            $resp = response([
                 'error'=>[
                     'type'=>'success',
                     'message'=>'The record has updated.'
                 ]
             ],200);
+
+
+
+            //We will update if there is an email with the given one
+           //else we add.
+            $name = explode(' ', $data['name']);
+            Newsletter::subscribeOrUpdate($data['email'], ['FNAME'=>$name[0], 'LNAME'=>$name[0]]);
+
+            //Delete the if there is
+            if($this->is_mail_exists($email))
+            {
+                //Delete the old one.
+                //We don't need it anymore.
+                //Newsletter::delete($eamil);   
+            }
+
+
+            return $resp;
     
         }
 
@@ -149,18 +177,26 @@ class Leads extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($leadId)
-    {
+    public function destroy(Request $request, $leadId)
+    {   
+       
+        
+        $eamil = $request->email;
         $delete = LeadsModel::destroy($leadId);
         
         if($delete)
         {
-            return response([
+            $resp =  response([
                 'error'=>[
                     'type'=>'success',
                     'message'=>'The record deleted.'
                 ]
             ],200);
+
+            //Delete it from mailChimp as well
+            Newsletter::delete($eamil);
+
+            return $resp;
         }
 
         return response([
@@ -170,5 +206,17 @@ class Leads extends Controller
             ]
         ],422);
 
+    }
+
+    /**
+     * Checks if the entered e-mail is already exists
+     * 
+     * @param string $email the mail that would control
+     */
+    private function is_mail_exists($email)
+    {
+        if (LeadsModel::where('email', '=', $email)->exists()) {
+            return true;
+         }
     }
 }

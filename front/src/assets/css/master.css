@@ -42,3 +42,9 @@
 .yellow-bg:hover{
     opacity: 0.9
 }
+
+.active-link {
+    background:var(--yellow);
+    color: white;
+
+}

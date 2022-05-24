@@ -9,7 +9,9 @@ export default {
             //Get the token from storage
             //That was setted in LoginForm.vue
             token: sessionStorage.getItem('token')
+            
         }
+      
     },
     actions:{
 
@@ -61,7 +63,9 @@ export default {
 
     },
 
-    getters:{},
+    getters:{
+
+    },
     
 
 }

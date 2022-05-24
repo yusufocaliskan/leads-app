@@ -1,11 +1,13 @@
 <script setup>
     import { defineProps, ref, toRef } from "vue";
-
+    import Notice from '../../components/admin/Notice.vue'
     const props = defineProps({
         lead_data: Object,
-        show: Boolean
+        show: Boolean,
+        errors: Object
     })
     
+   
 </script>
 
 <template>
@@ -19,6 +21,7 @@
             </div>
       </div>
     <div class="md:grid md:grid-cols-1 p-10 px-20 md:gap-6">
+      
     <div class="md:col-span-1">
         <div class="px-4 sm:px-0">
           <h3 class="text-2xl font-medium leading-6 text-gray-900">{{props.lead_data.name}}</h3>
@@ -31,7 +34,11 @@
         <form @submit.prevent="$emit('save-lead')">
           <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
+
+              <Notice :errors="props.errors" v-if="props.errors"/>
+
               <div class="grid grid-cols-6 gap-6">
+                
                 <div class="col-span-6 sm:col-span-3">
                   <label   for="name" class="block text-sm font-medium text-gray-700">First name</label>
                   <input v-model="props.lead_data.name" type="text" name="name" id="name" autocomplete="given-name" class="mt-1 p-2 border-1 focus:ring-indigo-500 border-zinc-700 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md" />

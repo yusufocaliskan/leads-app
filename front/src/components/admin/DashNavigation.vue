@@ -37,11 +37,23 @@
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <img class="h-8 w-auto sm:h-10" src="../../assets/images/logo.png" alt="Learnworlds" />
+              <router-link :to="'/'">
+                <img class="h-8 w-auto sm:h-10" src="../../assets/images/logo.png" alt="Learnworlds" />
+              </router-link>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <router-link :to="item.href" v-for="item in navigation" :key="item.name"  :class="[item.current ? 'green-bg text-white' : 'text-gray-500  hover:text-gray-900', 'px-3 py-2 rounded-md text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</router-link>
+                <router-link :to="'/dashboard'" :class="'text-gray-500  hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium'">
+                  Dashboard
+                </router-link>
+
+                <router-link :to="'/leads'" :class="'text-gray-500  hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium'">
+                  Leads
+                </router-link>
+                
+                <router-link :to="'/'" :class="'text-gray-500  hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium'">
+                  Home
+                </router-link>
               </div>
             </div>
           </div>

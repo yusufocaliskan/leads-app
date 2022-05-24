@@ -12,6 +12,7 @@ const routes = [...client_layout, ...admin_routes];
 //Create the router
 const router = createRouter({
     routes:routes,
+    linkActiveClass: 'active-link',
     history:createWebHistory()
 });
 

@@ -15,7 +15,6 @@ const route = useRoute()
 
 //Define the layout container
 const default_layout = ClientLayout;
-
 const layout_container = {
   'LoginLayout' : LoginLayout,
   'AdminLayout' : AdminLayout,

@@ -15,10 +15,12 @@
     
     //Leads...
     const all_leads = ref([])
-
     const current_lead = ref([])
     
-    let show_form = false
+    //errors
+    const errors = ref([])
+
+    
 
     /**
      * Get all the leads..
@@ -41,10 +43,16 @@
      * Deleting a lead by giving it's id
      * @param {mixed} leadId The deleted lead's Id
      */
-    function delete_lead(leadId)
+    function delete_lead(leadId, email)
     {
+        //Ask her if she is sure?
+        if(!confirm("Do you realy want to delete?"))
+        {
+            return false;
+        }
+
         //deleted
-        Axios.post('/lead/delete/'+leadId)
+        Axios.post('/lead/delete/'+leadId, {'email':email})
         .then(resp=>{
             
             //Load the leads again..
@@ -55,26 +63,48 @@
             Toast.success(resp.data.error.message,{ position: POSITION.BOTTOM_LEFT })
           
         })
+        .catch(err => {
+            errors.value = err.response.data.errors
+        })
     }
 
+    /**
+     * Gets the leads data from sever
+     * using its id.
+     * 
+     * @param {mixed} leadId leads id
+     */
     function edit_lead(leadId){
 
-        show_form = true
         //Get the leads data via id
         Axios.post('/lead/show/'+leadId)
         .then(resp => {
             current_lead.value = resp.data.lead;
+            window.scrollTo(0, 0);
            
         })
 
     }
 
+    /**
+     * Saves the leads' data to database
+     */
     function save_lead()
     {
         
        Axios.put('/lead/update/'+current_lead.value._id,current_lead.value)
        .then(resp => {
            Toast.success(resp.data.error.message)
+           
+          //Clear variables.
+          lead_data.value.email = null
+          lead_data.value.name = null
+          lead_data.value.terms = null
+          errors.value = null
+
+       })
+       .catch(err => {
+            errors.value = err.response.data.errors
        })
     }
 
@@ -82,7 +112,7 @@
 
 <template>
 
-<EditForm :show="show_form" :lead_data="current_lead" @save-lead="save_lead" />
+<EditForm :errors="errors" :lead_data="current_lead" @save-lead="save_lead" />
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -123,7 +153,7 @@
                 </td>
                 
                 <td class="px-6 py-4 text-right">
-                    <a @click="delete_lead(lead._id, $event)"   href="#" class="inline-block font-medium text-blue-600 dark:text-blue-500 hover:text-black hover:bg-amber-300 rounded p-1  ">
+                    <a @click="delete_lead(lead._id, lead.email)"   href="#" class="inline-block font-medium text-blue-600 dark:text-blue-500 hover:text-black hover:bg-amber-300 rounded p-1  ">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                         </svg>
