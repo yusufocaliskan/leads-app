@@ -60,7 +60,7 @@
               </div>
               <div class="mt-3 sm:mt-0 sm:ml-3" v-else>
 
-                <router-link to="/dashboard" class="green-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-300 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                <router-link to="/leads" class="green-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-300 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                   </svg> 

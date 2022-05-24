@@ -19,8 +19,7 @@
             <div class="px-4 py-5 bg-white sm:p-6 mt-4">
                 <h1 class="font-medium text-2xl green-color">Application form</h1>
                  <p class="mt-2 text-md mb-5 text-gray-500">
-                   
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed ullam eveniet commodi amet hic nulla est eum debitis porro nisi? Ducimus, debitis quasi voluptas velit?
+                  We are looking for a talented and competitive Software Engineer that has a passion for software development and technology.
                 </p>
                 
                 <Notice :errors="errors" v-if="errors"/>
