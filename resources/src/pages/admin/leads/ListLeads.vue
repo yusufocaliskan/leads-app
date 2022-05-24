@@ -103,6 +103,10 @@
             Toast.success(resp.data.error.message)
             errors.value = null
             Store.dispatch('setLoading',false)
+
+            //Load the leads again..
+            //Refresh the table
+            get_all_leads()
        })
        .catch(err => {
            console.log(err)
