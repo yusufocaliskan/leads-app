@@ -8,8 +8,7 @@ export default {
 
             //Get the token from storage
             //That was setted in LoginForm.vue
-            token: sessionStorage.getItem('token')
-            
+            token: sessionStorage.getItem('token'),
         }
       
     },
@@ -65,6 +64,22 @@ export default {
 
     getters:{
 
+        /**
+         * Checks if the admin is logged in
+         * 
+         * @param {object} state 
+         * @returns boolean
+         */
+        isLoggedIn(state)
+        {   
+            console.log(state)
+            if(state.admin_data.token != null)
+            {
+                return true
+            }
+
+            return false;
+        }
     },
     
 

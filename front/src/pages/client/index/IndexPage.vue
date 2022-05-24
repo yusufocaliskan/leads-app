@@ -1,5 +1,9 @@
 <script setup>
-import { Popover } from '@headlessui/vue'
+  import { Popover } from '@headlessui/vue'
+  import { inject } from 'vue';
+
+  const Store = inject('Store')
+
 </script>
 
 <template>
@@ -44,13 +48,23 @@ import { Popover } from '@headlessui/vue'
                   <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg> <span class="pl-5">Application Form</span>
                 </router-link>
-                
+
               </div>
-              <div class="mt-3 sm:mt-0 sm:ml-3">
+              <div class="mt-3 sm:mt-0 sm:ml-3" v-if="Store.getters.isLoggedIn != true">
+
                 <router-link to="/login" class="purple-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg> <span class="pl-5">Login</span>
+                </router-link>
+              </div>
+              <div class="mt-3 sm:mt-0 sm:ml-3" v-else>
+
+                <router-link to="/dashboard" class="green-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black-300 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                  </svg> 
+                  <span class="pl-5">Dashboard</span>
                 </router-link>
               </div>
             </div>
