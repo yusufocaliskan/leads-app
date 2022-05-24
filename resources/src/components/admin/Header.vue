@@ -1,7 +1,6 @@
 <script setup>
     import { useRoute } from "vue-router"
     const Route = useRoute()
-    console.log(Route.meta.dashboard_title)
 </script>
 <template>
 

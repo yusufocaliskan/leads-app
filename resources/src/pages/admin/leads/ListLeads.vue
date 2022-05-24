@@ -115,6 +115,7 @@
 <template>
     
 <EditForm :show="show_edit_form" :errors="errors" :lead_data="current_lead" @save-lead="save_lead" />
+
 <div class="loading" v-if="is_Loading">
     <div class="loader"></div>
     <p>Loading...</p>

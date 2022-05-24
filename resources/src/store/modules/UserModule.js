@@ -72,7 +72,7 @@ export default {
          */
         isLoggedIn(state)
         {   
-            console.log(state)
+            
             if(state.admin_data.token != null)
             {
                 return true

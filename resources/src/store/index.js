@@ -1,8 +1,6 @@
 import {createStore} from 'vuex'
 
 //Export all the modules
-import AuthModule from './modules/AuthModule'
-import LeadsModule from './modules/LeadsModule'
 import UserModule from './modules/UserModule'
 
 /**
@@ -24,8 +22,6 @@ const store = createStore({
     },
     getters:{},
     modules:{
-        LeadsModule:LeadsModule,
-        AuthModule:AuthModule,
         UserModule:UserModule
     }
 });
