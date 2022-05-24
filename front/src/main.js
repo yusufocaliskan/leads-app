@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
+
 import LeadsAxios from './utilities/LeadsAxios'
 
 //Import toast notitications
@@ -8,8 +9,7 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 //Modal
-import VueFinalModal from 'vue-final-modal'
-import { $vfm } from 'vue-final-modal'
+import 'flowbite';
 
 
 //import the store and router 
@@ -23,10 +23,7 @@ const app = createApp(App);
 app.provide('Axios', LeadsAxios)
 app.provide('Store', store)
 app.provide('Router', router)
-app.provide('vModal',$vfm)
 
-//set modal
-app.use(VueFinalModal())
 
 //set the store and the router
 //Mids
