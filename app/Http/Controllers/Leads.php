@@ -18,9 +18,8 @@ class Leads extends Controller
     public function index()
     {   
         //Get all the data 
-        $leads = LeadsModel::get();
+        $leads = LeadsModel::orderBy("created_at","desc")->get();
         
-
         //An response it.
         return response([
             'leads'=>$leads
