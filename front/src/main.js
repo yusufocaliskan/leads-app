@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
+import { useRoute } from 'vue-router'
 
 import LeadsAxios from './utilities/LeadsAxios'
 
@@ -23,6 +24,7 @@ const app = createApp(App);
 app.provide('Axios', LeadsAxios)
 app.provide('Store', store)
 app.provide('Router', router)
+app.provide('Route', useRoute)
 
 
 //set the store and the router
