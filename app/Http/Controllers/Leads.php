@@ -149,7 +149,7 @@ class Leads extends Controller
             Newsletter::subscribeOrUpdate($data['email'], ['FNAME'=>$name[0], 'LNAME'=>$name[0]]);
 
             //Delete the if there is
-            if($this->is_mail_exists($email))
+            if($this->is_mail_exists($data['email']))
             {
                 //Delete the old one.
                 //We don't need it anymore.
