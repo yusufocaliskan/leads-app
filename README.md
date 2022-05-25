@@ -1,19 +1,19 @@
 
 # Leads Application
-Leads Application basicly captures potetial Leads with some information. We persist their information on the Mongo database and also save them in a MailChimp list so we can send them e-mail for marketing purpose. 
+Leads Application basically captures potetial Leads with some information. We stores their informations on the Mongo database and also save them in a MailChimp list so we can send them e-mail for marketing purpose. 
 
-In this SPA I used the version 3 of VueJs in Composition Api. Compisition APi helps to write more filexable and readable codes.
+In this SPA I used the version 3 of VueJs with Composition Api. Compisition APi helps to write more filexable and readable codes.
 
 # Create
 
 ## Add New Route
-In order to add new page to the system you should create the route for both side route. Because knowing how to create a routes for laravel is a common knowledge I'm not going to explain in  here. 
+In order to add new page to the system you should create the route for both side route. Because knowing how to create a routes for laravel is a common knowledge I'm not going to explain in here. 
 
 The app using Laravel api routes, so the links will be like that:
 
 http://localhost:8000/api/xxx/yyy
 
-The `api` indicator must be added to url when sendin a request to the server.
+The `api` indicator must be added to the url when sending a request to server.
 
 For the system that I created by using `Vue`, to insert a new `route`, go and choose a router type (admin/client) in the `router` directory under `resources`.
 
@@ -35,6 +35,7 @@ And then add those line to the json formatted variable that named `admin_routes`
         }
         
     },
+    
 - **path** : the link.<br>
 - **component** : the component that imported above.<br>
 - **name** : Giving a new name to the route would help us to reaching it easyly <br>
