@@ -6,7 +6,7 @@ In this SPA I used the version 3 of VueJs in Composition Api. Compisition APi he
 
 # Create
 
-## Add new Page
+## Add New Route
 In order to add new page to the system you should create the route for both side route. Because knowing how to create a routes for laravel is a common knowledge I'm not going to explain in  here. 
 
 The app using Laravel api routes, so the links will be like that:
@@ -44,7 +44,7 @@ And then add those line to the json formatted variable that named `admin_routes`
      - **title** : Page title <br>
      - **dashboard_title** : Header title in the dashboard page.
 
-
+## Add New Page Component
 Let's create the ANewPage component under the `pages` directory. And add some staff..
     
     <template>
