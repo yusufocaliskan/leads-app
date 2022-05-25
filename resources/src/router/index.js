@@ -52,7 +52,7 @@ router.beforeEach((to, form, next) => {
     else if(store.state.UserModule.admin_data.token && to.name == 'login-form')
     {
         //Sent them to dashboard
-        next({name:'dashboard'})
+        next({name:'list-leads'})
     }
 
 

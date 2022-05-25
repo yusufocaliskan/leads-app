@@ -2,6 +2,9 @@
 # Leads Application
 Leads Application basicly captures potetial Leads with some information. We persist their information on the Mongo database and also save them in a MailChimp list so we can send them e-mail for marketing purpose. 
 
+In this SPA I used the version 3 of VueJs in Composition Api. Compisition APi helps to write more filexable and readable codes.
+
+# Create
 
 ## Add new Page
 In order to add new page to the system you should create the route for both side route. Because knowing how to create a routes for laravel is a common knowledge I'm not going to explain in  here. 
