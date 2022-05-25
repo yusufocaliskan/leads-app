@@ -1,6 +1,58 @@
 
-## Leads Application
+# Leads Application
+Leads Application basicly captures potetial Leads with some information. We persist their information on the Mongo database and also save them in a MailChimp list so we can send them e-mail for marketing purpose. 
 
+## Add new Route
+In order to add new page to the system you should create the route for both side route. Because knowing how to create a routes for laravel is a common knowledge I'm not going to explain in  here. 
+
+The app using Laravel api routes, so the links will be like that:
+
+http://localhost:8000/api/xxx/yyy
+
+The `api` indicator must be added to url when sendin a request to the server.
+
+For the system that I created by using `Vue`, to insert a new `route`, go and choose a router type (admin/client) in the `router` directory under `resources`.
+
+Import a new page component to at the top of admin.js (for exp.) 
+
+    import ANewPage from '../pages/ANewPage.vue'
+
+And then add those line to the json formatted variable that named `admin_routes`
+
+    {
+        path: '/a-new-page',
+        component:ANewPage,
+        name: 'new-page',
+        meta: {
+            layout:'AdminLayout',
+            auth:true,
+            title: 'A new Page | Leads Application',
+            dashboard_title: 'New Page',
+        }
+        
+    },
+- **path** : the link.<br>
+- **component** : the component that imported above.<br>
+- **name** : Giving a new name to the route would help us to reaching it easyly <br>
+- **meta** : the section is customizable.<br>
+     - **layout** : The shape of the page. There are several of it.(ClientLayout, AdminLayout, LoginLayout.) You can also create one. But you how import it in to `App.js`<br> 
+     - **auth** : If the page needed to auth set it true. <br> 
+     - **title** : Page title <br>
+     - **dashboard_title** : Header title in the dashboard page.
+
+
+Let's create the ANewPage component under the `pages` directory. And add some staff..
+    
+    <template>
+        <h1 class="text-lg text-indigo-400">Silav, dinya</h1>
+        <h1 class="text-lg text-indigo-400">Hello, World</h1>
+    </template>
+
+to add the new page link to Dashboard navigation links, go to and open the `components/admin/DashboardNavigation.vue` ad find the `nav` conts to add the path
+
+    { name: 'New Page', path: '/new-page', current: false },
+
+After this change the link will be apeare at the top of admin layout.
 
 # Installation
 
@@ -54,7 +106,7 @@ After all those step, now we can migration the tables. In order to create the ta
 
     php artisan migrate
 
-With fews other table, laravel will create the `leads` table and `users`.
+With fews other tables, Laravel will create two more tables with the name `leads` and `users`.
 
 Let's add some record to the tables. We will then needed.
 
@@ -84,4 +136,10 @@ And to run the vite just use the below command
 
     npm run dev
 
-The vite will open a server over 3000 port so you can use the http://localhost:3000 to go to the application.
+The vite will open a server over 3000 port so you can use the http://localhost:3000 to go to the application. You can use those information to logged in to dashboard
+
+**E-mail** : usib@gmail.com <br>
+**Password** : 2121
+
+(for now we don't let the admin to change login informations.)
+

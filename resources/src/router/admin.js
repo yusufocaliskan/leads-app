@@ -1,8 +1,8 @@
 //Imports all pages components
 import DashboardIndex from '../pages/admin/dashboard/DashboardIndex.vue'
 import ListLeads from '../pages/admin/leads/ListLeads.vue'
-//Login Page
 import LoginForm from '../pages/admin/login/LoginForm.vue'
+
 
 //create the admin routes array
 const admin_routes = [
@@ -30,7 +30,7 @@ const admin_routes = [
         
     },
 
-    {
+    ,{
         path: '/login',
         component:LoginForm,
         name: 'login-form',
