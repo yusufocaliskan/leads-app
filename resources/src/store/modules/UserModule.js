@@ -72,7 +72,6 @@ export default {
          */
         isLoggedIn(state)
         {   
-            
             if(state.admin_data.token != null)
             {
                 return true

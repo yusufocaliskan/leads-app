@@ -2,7 +2,8 @@
 # Leads Application
 Leads Application basicly captures potetial Leads with some information. We persist their information on the Mongo database and also save them in a MailChimp list so we can send them e-mail for marketing purpose. 
 
-## Add new Route
+
+## Add new Page
 In order to add new page to the system you should create the route for both side route. Because knowing how to create a routes for laravel is a common knowledge I'm not going to explain in  here. 
 
 The app using Laravel api routes, so the links will be like that:
@@ -142,4 +143,20 @@ The vite will open a server over 3000 port so you can use the http://localhost:3
 **Password** : 2121
 
 (for now we don't let the admin to change login informations.)
+
+
+# Some Extra Information
+Let me give you some more information about the packages that I used to create the application.
+
+- **vuex**: 
+In addition to those information, I create a store by using vuex, to hold the important information and share them among all the components.
+
+- **vue-router** to routing the incoming request I used vue-router which in history.
+  
+- **axios** Axios helps us to sent xhttp request to server.
+
+- **vue-toastification** Toast package helped me to create pretty good alert
+
+- ***flowbite, tailwindcss** helped me to desing the layouts
+  
 
