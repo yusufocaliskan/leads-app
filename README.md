@@ -90,8 +90,9 @@ In addition to the database information set the Api Keys of the `MailChimp` with
     MAILCHIMP_LIST_ID=
 
 ## Installing MongoDB (Optional)
-The app uses MongoDb to store the leads informations. So we need MongoDB on server. To install MongoDB database we use docker-compose. You will need to the Docker app installed on your computer to youse `docker-compose`. 
+The app uses MongoDb to store the leads informations. So we need MongoDB on server. To install MongoDB database we use docker-compose. You will need to the Docker app installed on your computer to youse `docker-compose`.
 
+Open the `docker-compose.yml` file and change the `volume` value as you wish. In this example, I save the MongoDb datas under "/opt/data" direction.
 
 `cd` into the app file and run the command
 
@@ -102,6 +103,7 @@ Docker will install a `mongodb` image from the up and create a container using i
     docker ps
 
 will show us the proccess.
+
 
 
 If you already had mongodb installed on your computer, you can pass this step.
