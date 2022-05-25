@@ -1,7 +1,7 @@
    ![Leads Application](public/screen-shot.png)
 
 
-# Leads Application
+# Leads Vue+Laravel Application
 Leads Application basically captures potetial Leads with some information. We stores their informations on the Mongo database and also save them in a MailChimp list so we can send them e-mail for marketing purpose. 
 
 In this SPA I used the version 3 of VueJs with Composition Api. Compisition APi helps to write more filexable and readable codes.
