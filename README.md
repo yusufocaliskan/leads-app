@@ -1,4 +1,4 @@
-   ![Leads Application](../leads-app/resources/public/screen-shot.png)
+   ![Leads Application](public/screen-shot.png)
 
 
 # Leads Application
