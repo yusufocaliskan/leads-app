@@ -102,9 +102,11 @@ Docker will install a `mongodb` image from the up and create a container using i
     
     docker ps
 
-will show us the proccess.
+This command will show us the proccess. Let's check if the `container` created correctly.
 
+    docker container ls -a
 
+Make sure if there was a container with name `leads-mongo`.
 
 If you already had mongodb installed on your computer, you can pass this step.
 
