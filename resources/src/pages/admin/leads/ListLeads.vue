@@ -30,6 +30,7 @@
     onMounted(() => {   
         get_all_leads()
     })
+
     function get_all_leads(){
 
         Store.dispatch('setLoading',true)
@@ -50,11 +51,16 @@
      */
     function delete_lead(leadId, email)
     {
-        //Ask her if she is sure?
+        Store.dispatch('setLoading',true)
+
+        //Ask her if she was sure?
         if(!confirm("Do you realy want to delete?"))
         {
+            Store.dispatch('setLoading',false)
             return false;
         }
+
+
 
         //deleted
         Axios.post('/lead/delete/'+leadId, {'email':email})
@@ -63,12 +69,14 @@
             //Load the leads again..
             //Refresh the table
             get_all_leads()
+            Store.dispatch('setLoading',false)
 
             //Show the responeded message
             Toast.success(resp.data.error.message,{ position: POSITION.BOTTOM_LEFT })
           
         })
         .catch(err => {
+            Store.dispatch('setLoading',false)
             errors.value = err.response.data.errors
         })
     }

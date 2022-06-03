@@ -63,8 +63,6 @@ class Users extends Controller
             'message' => 'Something went wrong'
         ], 200);
        
-
-        
     }
 
   

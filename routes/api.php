@@ -24,9 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /*********************************** | Leads App Router | *****************************************/
 
-//List all leads located in the database
-//Prefix will helps us to create more readable urls.
+//Lists all leads located in the database
 Route::post('/leads',[Leads::class, 'index']);
+
+//Prefix will help us to create more readable urls.
 Route::prefix('/lead')->group(function(){
 
     //selects by id.  /leads/1

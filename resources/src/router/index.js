@@ -5,6 +5,10 @@ import PageNotFound from '../components/PageNotFound.vue'
 //Import the custom routes
 import admin_routes from './admin';
 import client_route from './client';
+
+/**
+ * Page not found
+ */
 const default_routes =[
     { 
         path: '/:pathMatch(.*)*', 

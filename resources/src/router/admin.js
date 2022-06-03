@@ -1,6 +1,7 @@
 //Imports all pages components
 import DashboardIndex from '../pages/admin/dashboard/DashboardIndex.vue'
 import ListLeads from '../pages/admin/leads/ListLeads.vue'
+
 //Login Page
 import LoginForm from '../pages/admin/login/LoginForm.vue'
 

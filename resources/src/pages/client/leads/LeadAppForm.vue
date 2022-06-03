@@ -1,5 +1,5 @@
 <script setup>
-    import AppForm from "../../../components/leads/AppForm.vue";
+  import AppForm from "../../../components/leads/AppForm.vue";
 
   import { ref, inject,computed } from 'vue'
   import { useToast } from 'vue-toastification';
@@ -24,6 +24,7 @@
   function save_lead()
   {
       Store.dispatch('setLoading',true)
+      
       Axios.post('/lead/create/',{
         'name':lead_data.value.name,
         'email':lead_data.value.email,

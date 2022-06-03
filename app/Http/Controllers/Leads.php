@@ -148,7 +148,7 @@ class Leads extends Controller
             $name = explode(' ', $data['name']);
             Newsletter::subscribeOrUpdate($data['email'], ['FNAME'=>$name[0], 'LNAME'=>$name[0]]);
 
-            //Delete the if there is
+            //TODO: Delete the if there is
             if($this->is_mail_exists($data['email']))
             {
                 //Delete the old one.
